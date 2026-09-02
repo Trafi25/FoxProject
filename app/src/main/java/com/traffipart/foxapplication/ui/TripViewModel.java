@@ -1,9 +1,8 @@
 package com.traffipart.foxapplication.ui;
 
 
-import com.traffipart.foxapplication.domain.TripLoadResult;
-import com.traffipart.foxapplication.domain.TripRepository;
-
+import com.traffipart.foxapplication.domain.data.TripLoadResult;
+import com.traffipart.foxapplication.domain.repository.TripRepository;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 

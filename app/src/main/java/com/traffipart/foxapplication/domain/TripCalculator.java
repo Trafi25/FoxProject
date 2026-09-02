@@ -1,5 +1,8 @@
 package com.traffipart.foxapplication.domain;
 
+import com.traffipart.foxapplication.domain.data.GeoPoint;
+import com.traffipart.foxapplication.domain.data.TripSummary;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
@@ -52,6 +55,17 @@ public final class TripCalculator {
         );
     }
 
+    /**
+     * Calculates the great-circle distance between two points on a sphere given their
+     * longitudes and latitudes using the Haversine formula.
+     *
+     * Convert latitude and longitude differences from degrees to radians
+     * Convert latitudes to radians
+     * Calculate the square of half the chord length between the points (a in Haversine formula)
+     * Clamp value to [0, 1] to avoid errors in Math.sqrt due to floating point inaccuracies
+     * Calculate the angular distance in radians (c in Haversine formula)
+     * Distance = Radius * centralAngle
+     */
     static double haversineKilometers(
             GeoPoint first,
             GeoPoint second

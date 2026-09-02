@@ -1,5 +1,6 @@
-package com.traffipart.foxapplication;
+package com.traffipart.foxapplication.ui;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,10 +8,11 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import com.traffipart.foxapplication.domain.TripRepository;
-import com.traffipart.foxapplication.domain.TripSummary;
-import com.traffipart.foxapplication.ui.TripUiState;
-import com.traffipart.foxapplication.ui.TripViewModel;
+
+import com.traffipart.foxapplication.FoxApplication;
+import com.traffipart.foxapplication.R;
+import com.traffipart.foxapplication.domain.repository.TripRepository;
+import com.traffipart.foxapplication.domain.data.TripSummary;
 
 public final class MainActivity extends Activity {
 
@@ -83,6 +85,7 @@ public final class MainActivity extends Activity {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void renderLoading() {
         progressBar.setVisibility(View.VISIBLE);
 
@@ -97,6 +100,7 @@ public final class MainActivity extends Activity {
         retryButton.setEnabled(false);
     }
 
+    @SuppressLint("SetTextI18n")
     private void renderContent(
             TripSummary summary,
             boolean fromCache

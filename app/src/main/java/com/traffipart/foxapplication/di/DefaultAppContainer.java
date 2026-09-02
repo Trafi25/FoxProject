@@ -5,7 +5,7 @@ import com.traffipart.foxapplication.data.DefaultTripRepository;
 import com.traffipart.foxapplication.data.DriveApiClient;
 import com.traffipart.foxapplication.data.TripCache;
 import com.traffipart.foxapplication.data.TripJsonParser;
-import com.traffipart.foxapplication.domain.TripRepository;
+import com.traffipart.foxapplication.domain.repository.TripRepository;
 
 public final class DefaultAppContainer
         implements AppContainer {

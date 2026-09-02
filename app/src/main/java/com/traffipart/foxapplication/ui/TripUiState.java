@@ -1,6 +1,6 @@
 package com.traffipart.foxapplication.ui;
 
-import com.traffipart.foxapplication.domain.TripSummary;
+import com.traffipart.foxapplication.domain.data.TripSummary;
 
 public record TripUiState(
         Status status,

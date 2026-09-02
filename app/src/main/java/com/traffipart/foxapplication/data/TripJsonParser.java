@@ -1,6 +1,6 @@
 package com.traffipart.foxapplication.data;
 
-import com.traffipart.foxapplication.domain.GeoPoint;
+import com.traffipart.foxapplication.domain.data.GeoPoint;
 
 import org.json.JSONArray;
 import org.json.JSONException;

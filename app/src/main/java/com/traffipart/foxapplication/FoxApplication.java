@@ -11,7 +11,6 @@ public final class FoxApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         appContainer = new DefaultAppContainer(this);
     }
 

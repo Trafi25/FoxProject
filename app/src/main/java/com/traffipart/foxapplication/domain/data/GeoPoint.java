@@ -1,4 +1,4 @@
-package com.traffipart.foxapplication.domain;
+package com.traffipart.foxapplication.domain.data;
 
 public record GeoPoint(
         String time,
