@@ -1,4 +1,6 @@
-package com.traffipart.foxapplication.domain;
+package com.traffipart.foxapplication.data;
+
+import com.traffipart.foxapplication.domain.GeoPoint;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,7 +56,6 @@ public final class TripJsonParser {
                         longitude
                 ));
             } catch (JSONException | IllegalArgumentException ignored) {
-                // Ignore one invalid point and continue parsing.
             }
         }
 
