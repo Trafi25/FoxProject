@@ -11,14 +11,18 @@ Haversine-Formel berechnete Distanz an.
 2. Gradle-Synchronisierung abwarten.
 3. App auf einem Gerät oder Emulator ab API 24 starten.
 
-## Gewählter Schwerpunkt: Fehlertoleranz und Unit-Tests
+## Gewählter Schwerpunkt: Fehlertoleranz und Offline-Fähigkeit
 
-Einzelne ungültige API-Einträge werden übersprungen. Nach einem
-erfolgreichen Abruf wird die JSON-Antwort atomar im internen
-App-Speicher gespeichert. Schlägt ein späterer Abruf fehl, zeigt die
-App automatisch die zuletzt gültigen Offline-Daten an. Ladezustand,
-Fehlerzustand, Datenquelle und erneutes Laden werden in der UI
-dargestellt. Unit-Tests prüfen Fahrzeit, Distanzsumme und Rundung.
+Einzelne ungültige API-Einträge werden validiert und übersprungen, während
+verwendbare Ortungspunkte weiterhin verarbeitet werden. Nach einem erfolgreichen
+Abruf wird die JSON-Antwort atomar im internen App-Speicher gesichert. Schlägt
+ein späterer Abruf durch einen Netzwerk-, HTTP- oder Datenfehler fehl, zeigt die
+App automatisch die zuletzt erfolgreich gespeicherten Daten an. Die Oberfläche
+unterscheidet aktuelle und zwischengespeicherte Daten und bietet bei einem
+vollständigen Fehler einen erneuten Ladeversuch an.
+
+Ergänzend prüfen Unit-Tests die Fahrzeit, Distanzsumme, Rundung sowie die
+Ergebnis- und Fehlerzustände des ViewModels.
 
 ## Annahmen
 
@@ -30,7 +34,7 @@ dargestellt. Unit-Tests prüfen Fahrzeit, Distanzsumme und Rundung.
 6. Die Erde wird für die Haversine-Berechnung als Kugel betrachtet.
 7. Der verwendete mittlere Erdradius beträgt 6371,0088 km.
 8. Die Distanz wird kaufmännisch auf zwei Nachkommastellen gerundet.
-9. 
+
 ## Architektur
 
 Die App verwendet eine kleine, framework-unabhängige MVVM-Architektur:
