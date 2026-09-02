@@ -3,19 +3,10 @@ package com.traffipart.foxapplication.data;
 import com.traffipart.foxapplication.domain.GeoPoint;
 import com.traffipart.foxapplication.domain.TripCalculator;
 import com.traffipart.foxapplication.domain.TripSummary;
-
 import java.io.IOException;
 import java.util.List;
-
-import com.traffipart.foxapplication.domain.GeoPoint;
-import com.traffipart.foxapplication.domain.TripCalculator;
 import com.traffipart.foxapplication.domain.TripLoadResult;
 import com.traffipart.foxapplication.domain.TripRepository;
-import com.traffipart.foxapplication.domain.TripSummary;
-
-import java.io.IOException;
-import java.util.List;
-
 public final class DefaultTripRepository
         implements TripRepository {
 

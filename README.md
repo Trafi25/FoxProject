@@ -45,3 +45,12 @@ Auf AndroidX ViewModel und Dependency-Injection-Frameworks wurde aufgrund
 der Vorgabe, keine zusätzlichen Frameworks einzusetzen, bewusst verzichtet.
 Die Abhängigkeiten werden manuell über Konstruktoren übergeben. Dadurch kann
 das ViewModel in Unit-Tests mit einem Fake-Repository getestet werden.
+
+## Dependency Injection
+
+Die App verwendet manuelle Dependency Injection ohne zusätzliches Framework.
+`DefaultAppContainer` dient als Composition Root und erstellt den
+Abhängigkeitsgraphen der Anwendung. Die konkrete Repository-Implementierung
+erhält API-Client, Cache und Parser über den Konstruktor. Das ViewModel hängt
+ausschließlich vom `TripRepository`-Interface ab. Dadurch bleiben die
+Abhängigkeiten sichtbar und können in Unit-Tests durch Fakes ersetzt werden.

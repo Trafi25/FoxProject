@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.traffipart.foxapplication.data.DefaultTripRepository;
 import com.traffipart.foxapplication.data.DriveApiClient;
 import com.traffipart.foxapplication.data.TripCache;
@@ -38,12 +37,13 @@ public final class MainActivity extends Activity {
 
         bindViews();
 
+        FoxApplication application =
+                (FoxApplication) getApplication();
+
         TripRepository repository =
-                new DefaultTripRepository(
-                        new DriveApiClient(),
-                        new TripCache(getApplicationContext()),
-                        new TripJsonParser()
-                );
+                application
+                        .appContainer()
+                        .tripRepository();
 
         viewModel = new TripViewModel(repository);
 
