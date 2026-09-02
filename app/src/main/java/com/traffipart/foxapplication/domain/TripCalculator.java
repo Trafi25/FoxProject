@@ -26,7 +26,7 @@ public final class TripCalculator {
 
         if (durationSeconds < 0) {
             throw new IllegalArgumentException(
-                    "Location points must be chronologically sorted"
+                    "Location points sorted not chronologically"
             );
         }
 
@@ -67,7 +67,7 @@ public final class TripCalculator {
         double firstLatitude = Math.toRadians(first.latitude());
         double secondLatitude = Math.toRadians(second.latitude());
 
-        double a =
+        double halfChordLengthSquared =
                 Math.sin(latitudeDifference / 2.0)
                         * Math.sin(latitudeDifference / 2.0)
                         + Math.cos(firstLatitude)
@@ -75,11 +75,11 @@ public final class TripCalculator {
                         * Math.sin(longitudeDifference / 2.0)
                         * Math.sin(longitudeDifference / 2.0);
 
-        a = Math.max(0.0, Math.min(1.0, a));
+        halfChordLengthSquared = Math.max(0.0, Math.min(1.0, halfChordLengthSquared));
 
         double centralAngle = 2.0 * Math.atan2(
-                Math.sqrt(a),
-                Math.sqrt(1.0 - a)
+                Math.sqrt(halfChordLengthSquared),
+                Math.sqrt(1.0 - halfChordLengthSquared)
         );
 
         return EARTH_RADIUS_KM * centralAngle;
