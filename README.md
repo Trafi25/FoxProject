@@ -30,3 +30,18 @@ dargestellt. Unit-Tests prüfen Fahrzeit, Distanzsumme und Rundung.
 6. Die Erde wird für die Haversine-Berechnung als Kugel betrachtet.
 7. Der verwendete mittlere Erdradius beträgt 6371,0088 km.
 8. Die Distanz wird kaufmännisch auf zwei Nachkommastellen gerundet.
+9. 
+## Architektur
+
+Die App verwendet eine kleine, framework-unabhängige MVVM-Architektur:
+
+- `MainActivity` stellt den Zustand dar und leitet Nutzeraktionen weiter.
+- `TripViewModel` verwaltet Lade-, Ergebnis- und Fehlerzustände.
+- `TripRepository` ist eine Domain-Schnittstelle.
+- `DefaultTripRepository` koordiniert API, Parser und Offline-Cache.
+- `TripCalculator` enthält die unabhängige Berechnungslogik.
+
+Auf AndroidX ViewModel und Dependency-Injection-Frameworks wurde aufgrund
+der Vorgabe, keine zusätzlichen Frameworks einzusetzen, bewusst verzichtet.
+Die Abhängigkeiten werden manuell über Konstruktoren übergeben. Dadurch kann
+das ViewModel in Unit-Tests mit einem Fake-Repository getestet werden.

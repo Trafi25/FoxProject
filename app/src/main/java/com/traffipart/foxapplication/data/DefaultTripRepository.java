@@ -7,13 +7,23 @@ import com.traffipart.foxapplication.domain.TripSummary;
 import java.io.IOException;
 import java.util.List;
 
-public final class TripRepository {
+import com.traffipart.foxapplication.domain.GeoPoint;
+import com.traffipart.foxapplication.domain.TripCalculator;
+import com.traffipart.foxapplication.domain.TripLoadResult;
+import com.traffipart.foxapplication.domain.TripRepository;
+import com.traffipart.foxapplication.domain.TripSummary;
+
+import java.io.IOException;
+import java.util.List;
+
+public final class DefaultTripRepository
+        implements TripRepository {
 
     private final DriveApiClient apiClient;
     private final TripCache cache;
     private final TripJsonParser parser;
 
-    public TripRepository(
+    public DefaultTripRepository(
             DriveApiClient apiClient,
             TripCache cache,
             TripJsonParser parser
@@ -23,12 +33,15 @@ public final class TripRepository {
         this.parser = parser;
     }
 
-    public LoadResult load() throws Exception {
+    @Override
+    public TripLoadResult load() throws Exception {
         Exception networkFailure;
 
         try {
             String liveJson = apiClient.download();
-            List<GeoPoint> livePoints = parser.parse(liveJson);
+
+            List<GeoPoint> livePoints =
+                    parser.parse(liveJson);
 
             TripSummary summary =
                     TripCalculator.summarize(livePoints);
@@ -36,10 +49,13 @@ public final class TripRepository {
             try {
                 cache.save(liveJson);
             } catch (IOException ignored) {
-                // Live data can still be displayed if caching fails.
+                // Valid live data can still be displayed.
             }
 
-            return new LoadResult(summary, false);
+            return new TripLoadResult(
+                    summary,
+                    false
+            );
         } catch (Exception exception) {
             networkFailure = exception;
         }
@@ -54,18 +70,15 @@ public final class TripRepository {
                 TripSummary summary =
                         TripCalculator.summarize(cachedPoints);
 
-                return new LoadResult(summary, true);
+                return new TripLoadResult(
+                        summary,
+                        true
+                );
             }
         } catch (Exception cacheFailure) {
             networkFailure.addSuppressed(cacheFailure);
         }
 
         throw networkFailure;
-    }
-
-    public record LoadResult(
-            TripSummary summary,
-            boolean fromCache
-    ) {
     }
 }
